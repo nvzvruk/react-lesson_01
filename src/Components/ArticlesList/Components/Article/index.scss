@@ -1,0 +1,25 @@
+.article {
+
+  &__title {
+    font-size: 20px;
+  }
+
+  &__text {
+    font-size: 16px;
+  }
+
+  .comments {
+
+    &__title {
+      font-size: 16px;
+      font-weight: normal;
+      font-style: italic;
+      text-transform: capitalize;
+    }
+
+    &__item {
+      padding-left: 40px;
+      font-size: 14px;
+    }
+  }
+}
