@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './index.scss';
 
 class Article extends Component {
+
+  static propTypes = {
+      title: PropTypes.string,
+      text: PropTypes.string,
+      comments: PropTypes.array
+  }
 
   constructor() {
     super();
@@ -9,6 +16,8 @@ class Article extends Component {
       isArticleShown: false,
       isCommentsShown: false
     }
+
+    this.text = null;
   }
 
   toggleArticleVisibility = () => {
@@ -27,6 +36,10 @@ class Article extends Component {
     })
   }
 
+  componentDidMount() {
+    console.log(this.text)
+  }
+
   render() {
     return (
       <div className="article">
@@ -36,10 +49,8 @@ class Article extends Component {
             {this.state.isArticleShown ? 'hide article' : 'show article'}
           </button>
         </h3>
-        {
-          this.state.isArticleShown ?
           <div className="article-content">
-          <p className="article__text">
+          <p ref={ref => this.text = ref} className="article__text">
             {this.props.text}
           </p>
 
@@ -61,10 +72,7 @@ class Article extends Component {
             }
 
           </div>
-
           </div>
-          : null
-        }
       </div>
     );
   }
