@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ArticlesList from './Components/ArticlesList';
+import './index.scss';
 
 class App extends Component {
   render() {

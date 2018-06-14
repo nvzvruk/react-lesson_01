@@ -13,20 +13,20 @@ class Article extends Component {
   constructor() {
     super();
     this.state =  {
-      isArticleShown: false,
+      isArticleShaved: true,
       isCommentsShown: false
     }
 
     this.text = null;
   }
 
-  toggleArticleVisibility = () => {
+  toggleArticleShaving = () => {
     if(this.state.isCommentsShown) {
       this.toggleCommentsVisibility();
     }
 
     this.setState({
-      isArticleShown: !this.state.isArticleShown
+        isArticleShaved: !this.state.isArticleShaved
     })
   }
 
@@ -45,8 +45,8 @@ class Article extends Component {
       <div className="article">
         <h3 className="article__title">{this.props.title}
         <button
-          onClick={() => this.toggleArticleVisibility()}>
-            {this.state.isArticleShown ? 'hide article' : 'show article'}
+          onClick={() => this.toggleArticleShaving()}>
+            {this.state.isArticleShaved ? 'show all article' : 'shave article'}
           </button>
         </h3>
           <div className="article-content">
