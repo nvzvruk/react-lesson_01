@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import shave from 'shave';
 import './index.scss';
 
 class Article extends Component {
@@ -8,36 +9,41 @@ class Article extends Component {
       title: PropTypes.string,
       text: PropTypes.string,
       comments: PropTypes.array
-  }
+  };
 
-  constructor() {
-    super();
-    this.state =  {
-      isArticleShaved: true,
-      isCommentsShown: false
-    }
+  constructor(props) {
+      super(props);
+      this.state =  {
+        isArticleShown: false,
+        isCommentsShown: false
+      };
 
-    this.text = null;
-  }
-
-  toggleArticleShaving = () => {
-    if(this.state.isCommentsShown) {
-      this.toggleCommentsVisibility();
-    }
-
-    this.setState({
-        isArticleShaved: !this.state.isArticleShaved
-    })
+      this.text = null;
   }
 
   toggleCommentsVisibility = () => {
-    this.setState({
-      isCommentsShown: !this.state.isCommentsShown
-    })
+      this.setState({
+          isCommentsShown: !this.state.isCommentsShown
+      })
+  };
+
+  toggleArticleShaving () {
+      if(this.state.isCommentsShown) {
+        this.toggleCommentsVisibility();
+      }
+
+      this.setState({isArticleShown: !this.state.isArticleShown}, () => {
+          this.shaveText();
+      });
   }
 
   componentDidMount() {
-    console.log(this.text)
+      this.shaveText()
+  }
+
+  shaveText = () => {
+      const maxHeight = parseInt(window.getComputedStyle(this.text).getPropertyValue('line-height')) * 2;
+      shave(this.text, this.state.isArticleShown ? Infinity : maxHeight);
   }
 
   render() {
@@ -46,7 +52,7 @@ class Article extends Component {
         <h3 className="article__title">{this.props.title}
         <button
           onClick={() => this.toggleArticleShaving()}>
-            {this.state.isArticleShaved ? 'show all article' : 'shave article'}
+            {this.state.isArticleShown ? 'shave article' : 'show all article'}
           </button>
         </h3>
           <div className="article-content">
@@ -64,13 +70,13 @@ class Article extends Component {
             {
               this.state.isCommentsShown ?
               <div className="comments-box">
-                {this.props.comments.map(comment =>
-                <p className="comments__item">
-                  {comment}
+                {this.props.comments.map((comment, index) =>
+                <p className="comments__item"
+                   key={index}>
+                    {comment}
                 </p>)}
               </div>: null
             }
-
           </div>
           </div>
       </div>
