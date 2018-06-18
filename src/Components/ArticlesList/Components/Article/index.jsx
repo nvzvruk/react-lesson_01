@@ -2,19 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import shave from 'shave';
 import './index.scss';
-import Modal from 'react-modal';
-
-const customStyles = {
-    content : {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)'
-    }
-};
-
 
 class Article extends Component {
 
@@ -86,7 +73,7 @@ class Article extends Component {
                           <button onClick={() => this.toggleArticleShaving()}>
                               {this.state.isArticleShown ? 'shave article' : 'show all article'}
                           </button>
-                          <button onClick={() => this.showModal()}>
+                          <button onClick={this.props.showModal}>
                               remove article
                           </button>
                       </h3>
@@ -108,18 +95,18 @@ class Article extends Component {
                   </div> : null
               }
 
-              <Modal
-                  isOpen={this.state.isModalShown}
-                  style={customStyles}
-                  contentLabel="Example Modal"
-              >
+              {/*<Modal*/}
+                  {/*isOpen={this.state.isModalShown}*/}
+                  {/*style={customStyles}*/}
+                  {/*contentLabel="Example Modal"*/}
+              {/*>*/}
 
-                  <h2>Are you sure you want to remove this article?</h2>
-                  <div className="modal__actions">
-                      <button onClick={this.closeModal}>Close</button>
-                      <button onClick={this.removeArticle}>Yes, remove it</button>
-                  </div>
-              </Modal>
+                  {/*<h2>Are you sure you want to remove this article?</h2>*/}
+                  {/*<div className="modal__actions">*/}
+                      {/*<button onClick={this.closeModal}>Close</button>*/}
+                      {/*<button onClick={this.removeArticle}>Yes, remove it</button>*/}
+                  {/*</div>*/}
+              {/*</Modal>*/}
           </div>
 
       );

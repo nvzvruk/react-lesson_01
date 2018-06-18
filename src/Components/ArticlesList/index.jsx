@@ -1,45 +1,71 @@
 import React, { Component } from 'react';
 import Article from './Components/Article';
+import ARTICLES_CONTENT from './../../constants/ARTICLES_CONTENT';
 import './index.scss';
+import Modal from 'react-modal';
+
+const customStyles = {
+    content : {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)'
+    }
+};
 
 class ArticleList extends Component {
 
-   articleContents = [
-    {
-      title: 'Article1 Title',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do dskjfhsdof sijdsfifjsdo spfsdjfi sdj sodifjdsofi sdf  sdopfjsdof Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do dskjfhsdof sijdsfifjsdo spfsdjfi sdj sodifjd',
-      date: new Date('1995-12-17T03:24:00'),
-      comments: ['Article1 Comment1']
-    },
-    {
-      title: 'Article2 Title',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do sdfosfisdofisdo sdiofjs oifs sidfsofisdof sidfhsdofishdof i sdifdsofi Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do dskjfhsdof sijdsfifjsdo spfsdjfi sdj sodifjd',
-      date: new Date('1995-12-17T03:24:00'),
-      comments: ['Article2 Comment1', 'Article2 Comment2', 'Article2 Comment3', 'Article2 Comment4']
-    },
-    {
-      title: 'Article3 Title',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do sfsdif hso sdifjsd fjdofs dfusdif dshfushdoifsjfophj sifhisdjgksld sdfopsdf Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do dskjfhsdof sijdsfifjsdo spfsdjfi sdj sodifjd',
-      date: new Date('1995-12-17T03:24:00'),
-      comments: ['Article3 Comment1', 'Article3 Comment2', 'Article3 Comment3']
+    state = {
+        articles: [],
+        isModalShown: false,
+        articleToRemove: null
     }
-  ];
 
-  render() {
-    return (
-      <div className="article-list">
-        {
-          this.articleContents.map((item, index) =>
-              <Article title={item.title}
-                       text={item.text}
-                       comments={item.comments}
-                       key={index}
-                       index={index}
-                       toggleRemoveModal={this.props.toggleRemoveModal}/>)
-        }
-      </div>
-    );
-  }
+    showModal = (index) => {
+        this.setState({articleToRemove: index});
+        this.setState({isModalShown: true});
+    }
+
+    closeModal = () => {
+        this.setState({isModalShown: false});
+    }
+
+    removeArticle = () => {
+        let updatedArticles = this.state.articles.filter((article, index) => {
+            return index !== this.state.articleToRemove;
+        })
+
+        this.setState({articles: updatedArticles});
+        this.closeModal();
+    }
+
+    componentDidMount() {
+        this.setState({articles: ARTICLES_CONTENT})
+    }
+
+    render() {
+        return (
+            <div className="article-list">
+            {this.state.articles.map((item, index) =>
+                <Article title={item.title} text={item.text} comments={item.comments} key={index}
+                         showModal={() => this.showModal(index)}/>)
+            }
+            <Modal
+                isOpen={this.state.isModalShown}
+                style={customStyles}
+                contentLabel="Example Modal"
+            >
+
+                <h2>Are you sure you want to remove this article?</h2>
+                <div className="modal__actions">
+                    <button onClick={this.closeModal}>Close</button>
+                    <button onClick={this.removeArticle}>Yes, remove it</button>
+                </div>
+            </Modal>
+        </div>);
+    }
 }
 
 export default ArticleList;
