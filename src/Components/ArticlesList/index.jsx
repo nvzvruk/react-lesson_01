@@ -29,10 +29,13 @@ class ArticleList extends Component {
     return (
       <div className="article-list">
         {
-          this.articleContents.map((item, index) => <Article title={item.title}
-                                                    text={item.text}
-                                                    comments={item.comments}
-                                                    key={index}/>)
+          this.articleContents.map((item, index) =>
+              <Article title={item.title}
+                       text={item.text}
+                       comments={item.comments}
+                       key={index}
+                       index={index}
+                       toggleRemoveModal={this.props.toggleRemoveModal}/>)
         }
       </div>
     );
