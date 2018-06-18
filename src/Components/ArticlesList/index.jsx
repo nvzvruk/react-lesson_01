@@ -23,11 +23,11 @@ class MyProvider extends Component {
 
     state = {
         isRemoveButtonShown: true
-    }
+    };
 
     toggleRemovePossibility = () => {
         this.setState({isRemoveButtonShown: !this.state.isRemoveButtonShown})
-    }
+    };
 
     render() {
 
@@ -76,9 +76,8 @@ class ArticleList extends Component {
             <MyProvider>
                 <div className="article-list">
                     {this.state.articles.map((item, index) =>
-                        <ArticleListContext.Consumer>
-                            {(context) => (<Article key={index}
-                                                    title={item.title}
+                        <ArticleListContext.Consumer key={index}>
+                            {(context) => (<Article title={item.title}
                                                     text={item.text}
                                                     comments={item.comments}
                                                     showModal={() => this.showModal(index)}
