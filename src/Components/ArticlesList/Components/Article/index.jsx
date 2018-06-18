@@ -50,18 +50,18 @@ class Article extends Component {
       }
   }
 
-  showModal = () => {
-      this.setState({isModalShown: true});
-  }
-
-  closeModal = () => {
-      this.setState({isModalShown: false});
-  }
-
-  removeArticle = () => {
-      this.setState({isArticleDisplayed: false});
-      this.closeModal();
-  }
+  // showModal = () => {
+  //     this.setState({isModalShown: true});
+  // }
+  //
+  // closeModal = () => {
+  //     this.setState({isModalShown: false});
+  // }
+  //
+  // removeArticle = () => {
+  //     this.setState({isArticleDisplayed: false});
+  //     this.closeModal();
+  // }
 
   render() {
       return (
@@ -73,9 +73,12 @@ class Article extends Component {
                           <button onClick={() => this.toggleArticleShaving()}>
                               {this.state.isArticleShown ? 'shave article' : 'show all article'}
                           </button>
-                          <button onClick={this.props.showModal}>
-                              remove article
-                          </button>
+                          {this.props.isRemoveButtonShown ?
+                              <button onClick={this.props.showModal}>
+                                  remove article
+                              </button>
+                              : null
+                          }
                       </h3>
                       <div className="article-content">
                           <p ref={ref => this.text = ref} className="article__text">{this.props.text}</p>
