@@ -11,7 +11,7 @@ class App extends Component {
                 <header className="App-header">
                     <h1 className="App-title">News Portal</h1>
                 </header>
-                <ArticlesList showModal={(index) => this.showModal(index)}/>
+                <ArticlesList/>
             </div>
         );
     }

@@ -43,6 +43,10 @@ class Article extends Component {
       this.shaveText()
   }
 
+  componentDidUpdate() {
+      this.shaveText()
+  }
+
   shaveText = () => {
       if(this.text) {
           const maxHeight = parseInt(window.getComputedStyle(this.text).getPropertyValue('line-height'), 10) * 2;
