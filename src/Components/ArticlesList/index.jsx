@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Article from './Components/Article';
 import ARTICLES_CONTENT from './../../constants/ARTICLES_CONTENT';
+import { connect } from 'react-redux';
 import './index.scss';
 import Modal from 'react-modal';
 
@@ -73,17 +74,8 @@ class ArticleList extends Component {
 
     render() {
         return (
-            <MyProvider>
                 <div className="article-list">
-                    {this.state.articles.map((item, index) =>
-                        <ArticleListContext.Consumer key={index}>
-                            {(context) => (<Article title={item.title}
-                                                    text={item.text}
-                                                    comments={item.comments}
-                                                    showModal={() => this.showModal(index)}
-                                                    isRemoveButtonShown={context.isRemoveButtonShown}/>)}
-                        </ArticleListContext.Consumer>
-                    )}
+                    {this.props.children}
                     <Modal
                         isOpen={this.state.isModalShown}
                         style={customStyles}
@@ -96,7 +88,6 @@ class ArticleList extends Component {
                         </div>
                     </Modal>
                 </div>
-            </MyProvider>
         );
     }
 }

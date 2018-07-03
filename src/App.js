@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
 import ArticlesList from './Components/ArticlesList';
+import Article from './Components/ArticlesList/Components/Article';
+import Form from './Components/Form';
 import './index.scss';
+import store from './Stores'
+import { connect } from 'react-redux';
 
 
 class App extends Component {
+
+    removeArticle = (id) => {
+        store.dispatch({type: 'DELETE_ARTICLE', payload: {
+            id: id,
+        }})
+    }
 
     render() {
         return (
@@ -11,10 +21,25 @@ class App extends Component {
                 <header className="App-header">
                     <h1 className="App-title">News Portal</h1>
                 </header>
-                <ArticlesList/>
+                <Form/>
+                <ArticlesList>
+                    {this.props.articles.map((item, index) =>
+                        <Article key={index}
+                                 title={item.title}
+                                 text={item.text}
+                                 comments={item.comments}
+                                 id={item.id}
+                                 removeArticle={(id) => this.removeArticle(id)}
+                        />)}
+                </ArticlesList>
             </div>
         );
     }
 }
 
-export default App;
+export default connect(
+    state => ({
+        articles: state
+    }),
+    dispatch => ({})
+)(App);

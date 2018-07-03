@@ -6,11 +6,13 @@ import './index.scss';
 class Article extends Component {
 
   static propTypes = {
+      id: PropTypes.number,
       title: PropTypes.string,
       text: PropTypes.string,
       comments: PropTypes.array,
       showModal: PropTypes.func,
-      isRemoveButtonShown: PropTypes.bool
+      isRemoveButtonShown: PropTypes.bool,
+      removeArticle: PropTypes.func
   };
 
   constructor(props) {
@@ -40,6 +42,7 @@ class Article extends Component {
   }
 
   componentDidMount() {
+      console.log(this.props)
       this.shaveText()
   }
 
@@ -56,37 +59,27 @@ class Article extends Component {
 
   render() {
       return (
-          <div className="article-hoc">
               <div className="article">
-                  <h3 className="article__title">{this.props.title}
+                  <h3 className="article__title">{this.props.title}{this.props.id}
                       <button onClick={() => this.toggleArticleShaving()}>
                           {this.state.isArticleShown ? 'shave article' : 'show all article'}
                       </button>
-                      {this.props.isRemoveButtonShown ?
-                          <button onClick={this.props.showModal}>
-                              remove article
-                          </button>
-                          : null
-                      }
+
+                      <button onClick={() => this.props.removeArticle(this.props.id)}>
+                          Delete Article
+                      </button>
                   </h3>
                   <div className="article-content">
                       <p ref={ref => this.text = ref} className="article__text">{this.props.text}</p>
                       <div className="comments">
-                          <h4 className="comments__title">comments ({this.props.comments.length})
+                          <h4 className="comments__title">comments
                               <button onClick={() => this.toggleCommentsVisibility()}>
                                   {this.state.isCommentsShown ? 'hide comments' : 'show comments'}
                               </button>
                           </h4>
-                          { this.state.isCommentsShown ?
-                              <div className="comments-box">{this.props.comments.map((comment, index) =>
-                                  <p className="comments__item" key={index}>{comment}</p>)}
-                              </div>
-                              : null
-                          }
                       </div>
                   </div>
               </div>
-          </div>
       );
   }
 }

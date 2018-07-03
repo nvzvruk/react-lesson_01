@@ -1,0 +1,11 @@
+.form {
+  display: flex;
+  align-items: flex-start;
+
+  input, textarea, button {
+    background-color: bisque;
+    border: none;
+    border-radius: 5px;
+    margin: 0 5px ;
+  }
+}
