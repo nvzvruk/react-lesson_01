@@ -12,7 +12,8 @@ class Article extends Component {
       comments: PropTypes.array,
       showModal: PropTypes.func,
       isRemoveButtonShown: PropTypes.bool,
-      removeArticle: PropTypes.func
+      removeArticle: PropTypes.func,
+      removeComment: PropTypes.func
   };
 
   constructor(props) {
@@ -42,7 +43,6 @@ class Article extends Component {
   }
 
   componentDidMount() {
-      console.log(this.props)
       this.shaveText()
   }
 
@@ -77,6 +77,15 @@ class Article extends Component {
                                   {this.state.isCommentsShown ? 'hide comments' : 'show comments'}
                               </button>
                           </h4>
+                          { this.state.isCommentsShown ?
+                              <div className="comments-box">{this.props.comments.map((comment, index) =>
+                                  <div className="comments__item" key={index}>
+                                    <p className="text">{comment.text}</p>
+                                    <button onClick={() => this.props.removeComment(this.props.id, comment.id)}>remove comment</button>
+                                  </div>)}
+                              </div>
+                              : null
+                          }
                       </div>
                   </div>
               </div>

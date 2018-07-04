@@ -15,6 +15,13 @@ class App extends Component {
         }})
     }
 
+    removeComment = (articleId, commentId) => {
+        store.dispatch({type: 'DELETE_COMMENT', payload: {
+            articleId: articleId,
+            commentId: commentId
+        }})
+    }
+
     render() {
         return (
             <div className="App">
@@ -30,6 +37,7 @@ class App extends Component {
                                  comments={item.comments}
                                  id={item.id}
                                  removeArticle={(id) => this.removeArticle(id)}
+                                 removeComment={(articleId, commentId) => this.removeComment(articleId, commentId)}
                         />)}
                 </ArticlesList>
             </div>

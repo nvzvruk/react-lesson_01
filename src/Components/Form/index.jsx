@@ -16,9 +16,21 @@ class Form extends React.Component {
                 title: this.titleInput.value,
                 text: this.textInput.value,
                 date: new Date(),
-                comments: ['NewArtile Comment1']
+                comments: [
+                    {
+                        id: 1,
+                        text: 'Comment1'
+                    },
+                    {
+                        id: 2,
+                        text: 'Comment2'
+                    },
+                    {
+                        id: 3,
+                        text: 'Comment3'
+                    },
+                ]
             }})
-            console.log(store.getState())
         })
     }
 
