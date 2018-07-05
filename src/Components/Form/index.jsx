@@ -18,15 +18,15 @@ class Form extends React.Component {
                 date: new Date(),
                 comments: [
                     {
-                        id: 1,
+                        id: 0,
                         text: 'Comment1'
                     },
                     {
-                        id: 2,
+                        id: 1,
                         text: 'Comment2'
                     },
                     {
-                        id: 3,
+                        id: 2,
                         text: 'Comment3'
                     },
                 ]
