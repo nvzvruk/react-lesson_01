@@ -60,7 +60,7 @@ class Article extends Component {
   render() {
       return (
               <div className="article">
-                  <h3 className="article__title">{this.props.title}{this.props.id}
+                  <h3 className="article__title">{this.props.title} - {this.props.id}
                       <button onClick={() => this.toggleArticleShaving()}>
                           {this.state.isArticleShown ? 'shave article' : 'show all article'}
                       </button>
@@ -80,7 +80,7 @@ class Article extends Component {
                           { this.state.isCommentsShown ?
                               <div className="comments-box">{this.props.comments.map((comment, index) =>
                                   <div className="comments__item" key={index}>
-                                    <p className="text">{comment.text}</p>
+                                    <p className="text">{comment.text} - {comment.id}</p>
                                     <button onClick={() => this.props.removeComment(this.props.id, comment.id)}>remove comment</button>
                                   </div>)}
                               </div>

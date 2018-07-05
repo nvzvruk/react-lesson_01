@@ -47,7 +47,7 @@ class App extends Component {
 
 export default connect(
     state => ({
-        articles: state.article
+        articles: state.articles
     }),
     dispatch => ({})
 )(App);
