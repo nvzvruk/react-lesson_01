@@ -1,0 +1,12 @@
+.mainLayout {
+  max-width: 600px;
+}
+
+.modal {
+
+   &__actions {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+   }
+ }

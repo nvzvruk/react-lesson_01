@@ -1,4 +1,4 @@
-import ARTICLES_CONTENT from './../constants/ARTICLES_CONTENT';
+import ARTICLES_CONTENT from '../Constants/ARTICLES_CONTENT';
 const initialState = ARTICLES_CONTENT;
 
 export function articles (state = initialState, action) {

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import ArticlesList from './Components/ArticlesList';
-import Form from './Components/Form';
+import Routes from './Routes'
 import { connect } from 'react-redux';
 import './index.scss';
 
@@ -12,8 +11,7 @@ class App extends Component {
                 <header className="App-header">
                     <h1 className="App-title">News Portal</h1>
                 </header>
-                <Form/>
-                <ArticlesList articles={this.props.articles}/>
+                <Routes articles={this.props.articles}/>
             </div>
         );
     }

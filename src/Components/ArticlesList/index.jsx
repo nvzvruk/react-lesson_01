@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Article from './Components/Article'
-import store from './../../Stores'
+import Article from '../Article/index'
+import store from '../../Stores/index'
 import './index.scss';
 
 class ArticleList extends Component {
