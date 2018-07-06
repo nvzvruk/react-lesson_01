@@ -5,6 +5,23 @@ import './index.scss';
 
 class App extends Component {
 
+    articles = null;
+
+    getData = () => {
+        fetch('https://mateacademy-react-server.herokuapp.com/api/v1/article/get')
+            .then(response => {
+                response.json().then(data => {
+                    this.articles = data.items
+                    console.log(this.articles)
+                });
+            })
+    }
+
+    componentDidMount() {
+        this.getData();
+
+    }
+
     render() {
         return (
             <div className="App">
